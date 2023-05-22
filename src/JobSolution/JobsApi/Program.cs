@@ -1,4 +1,5 @@
 using JobsApi.Controllers;
+using Marten;
 using SlugGenerators;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICheckForUniqueValues, UniqueIdChecker>();
 builder.Services.AddScoped<SlugGenerator>();
 builder.Services.AddScoped<JobManager>();
+
+var dataConnectionString = builder.Configuration.GetConnectionString("data") ?? throw new ArgumentNullException("AHHHHHHHHHHH");
+
+builder.Services.AddMarten(options => // this gives us the IDocumentSession
+{
+    options.Connection(dataConnectionString);
+    if(builder.Environment.IsDevelopment())
+    {
+        options.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All;
+    }
+});
 
 var app = builder.Build();
 

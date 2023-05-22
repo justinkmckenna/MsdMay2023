@@ -3,11 +3,14 @@
 ### Get a list of jobs
 GET http://localhost:1337/jobs
 
+### Get a job
+GET http://localhost:1337/jobs/it-manager-2-a
+
 ### Adding a Job
 POST http://localhost:1337/jobs
 Content-Type: application/json
 
 {
-  "title": "IT Manager",
-  "description": "Manages Stuff"
+  "title": "IT Manager 2 a",
+  "description": "Manages more Stuff"
 }
