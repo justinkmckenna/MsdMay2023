@@ -31,6 +31,7 @@ namespace JobsApi.Controllers
                 Title = jobToSave.Title,
                 Description = jobToSave.Description,
             };
+            //todo: write event to stream
             return response;
         }
 

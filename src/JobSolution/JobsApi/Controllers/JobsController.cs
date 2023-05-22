@@ -21,10 +21,17 @@ public class JobsController : ControllerBase
     }
 
     [HttpGet("{slug}")]
-    public async Task<ActionResult> GetAllJobs(string slug)
+    public async Task<ActionResult> GetJobBySlug(string slug)
     {
         var response = await _jobManager.GetJobBySlugAsync(slug);
         return response is null ? NotFound() : Ok(response);
+    }
+
+    [HttpHead("{slug}")]
+    public async Task<ActionResult> GetJobExistsBySlug(string slug)
+    {
+        var response = await _jobManager.GetJobBySlugAsync(slug);
+        return response is null ? NotFound() : Ok();
     }
 
     [HttpPost]
