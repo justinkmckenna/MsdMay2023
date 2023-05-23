@@ -16,6 +16,7 @@ builder.Services.AddScoped<SlugGenerator>();
 builder.Services.AddScoped<JobManager>();
 
 var dataConnectionString = builder.Configuration.GetConnectionString("data") ?? throw new ArgumentNullException("AHHHHHHHHHHH");
+var kafkaConnectionString = builder.Configuration.GetConnectionString("kafka") ?? throw new ArgumentNullException("AHHHHHHHHHHH");
 
 builder.Services.AddMarten(options => // this gives us the IDocumentSession
 {
@@ -24,6 +25,13 @@ builder.Services.AddMarten(options => // this gives us the IDocumentSession
     {
         options.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All;
     }
+});
+
+builder.Services.AddCap(options =>
+{
+    options.UseKafka(kafkaConnectionString);
+    options.UsePostgreSql(dataConnectionString); // "outbox" pattern
+    options.UseDashboard();
 });
 
 var app = builder.Build();

@@ -30,8 +30,8 @@ public class JobsController : ControllerBase
     [HttpHead("{slug}")]
     public async Task<ActionResult> GetJobExistsBySlug(string slug)
     {
-        var response = await _jobManager.GetJobBySlugAsync(slug);
-        return response is null ? NotFound() : Ok();
+        var exists = await _jobManager.CheckForJobAsync(slug);
+        return exists ? Ok() : NotFound();
     }
 
     [HttpPost]
