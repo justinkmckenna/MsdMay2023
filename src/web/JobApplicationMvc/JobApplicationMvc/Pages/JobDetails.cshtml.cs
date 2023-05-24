@@ -87,7 +87,7 @@ namespace JobApplicationMvc.Pages
 
             };
             await _publisher.PublishAsync(DomainEvents.JobApplicationCreated.MessageId, eventToPublish);
-            return RedirectToPage("Index");
+            return RedirectToPage("");
         }
 
 
