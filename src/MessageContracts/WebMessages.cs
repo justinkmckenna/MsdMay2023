@@ -9,4 +9,11 @@
         public DateTimeOffset DateOfBirth { get; set; }
         public string EmailAddress { get; set; } = "";
     }
+
+    public class JobApplicationCreated
+    {
+        public static readonly string MessageId = "WebMessages.JobApplicationCreated";
+        public string ApplicantId { get; set; } = "";
+        public string JobOfferingId { get; set; } = "";
+    }
 }

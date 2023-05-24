@@ -22,6 +22,7 @@ public class JobOpeningsSubscriber : ICapSubscribe
             Title = jobListingMessage.JobName,
             Department = "Any",
             Description = jobListingMessage.JobId,
+            OpeningId = Guid.Parse(jobListingMessage.Id),
             ListedOn = new DateTimeOffset(DateTime.Now.ToUniversalTime()),
             SalaryBottomRange = jobListingMessage.SalaryRange.Min,
             SalaryTopRange = jobListingMessage.SalaryRange.Max,
